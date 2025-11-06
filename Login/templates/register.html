@@ -19,6 +19,9 @@
 
         <button type="submit">Register</button>
         <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
       </form>
     </div>
   </div>
