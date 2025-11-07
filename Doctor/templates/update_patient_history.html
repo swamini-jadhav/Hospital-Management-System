@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Patient History</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='update_patient_history.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='update_patient_history.css') }}"> -->
 </head>
 <body>
 
-    <h2>Update Patient History</h2>
-
-    <p>Patient Name: {{ patient.name }}</p>
-    <p>Department: {{ department }}</p>
 
     <form method="POST">
 
@@ -39,9 +35,7 @@
             <textarea name="medicines" rows="4" placeholder="Medicine 1 - 1-0-1&#10;Medicine 2 - 0-1-1"></textarea>
         </div>
 
-        <p class="note">
-            Students can add/remove fields based on what they want to show as patient’s history
-        </p>
+
 
         <button type="submit">save</button>
     </form>
