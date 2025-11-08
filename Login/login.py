@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 # Models
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
 
@@ -42,6 +43,7 @@ def register():
     message = ""
 
     if request.method == "POST":
+        name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
 
@@ -50,7 +52,7 @@ def register():
             message = "Username already exists"
         else:
             # Create user
-            new_user = User(username=username, password=password)
+            new_user = User(name=name, username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
             message = "Registration successful!"
