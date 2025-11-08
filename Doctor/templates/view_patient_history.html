@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='patient_history.css') }}">
+</head>
+<body>
+
+    <h2>Patient History</h2>
+
+    <p>Patient Name: {{ patient.name }}</p>
+    <p>Doctors' Name: {{ doctor.name }}</p>
+    <p>Department: {{ department }}</p>
+
+    <a href="{{ url_for('doctor_dashboard') }}">back</a>
+
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Visit No.</th>
+                <th>Visit Type</th>
+                <th>Tests Done</th>
+                <th>Diagnosis</th>
+                <th>Prescription</th>
+                <th>Medicines</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for entry in history %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entry.visit_type }}</td>
+                <td>{{ entry.tests_done }}</td>
+                <td>{{ entry.diagnosis }}</td>
+                <td>{{ entry.prescription }}</td>
+                <td>{{ entry.medicines }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No history available</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

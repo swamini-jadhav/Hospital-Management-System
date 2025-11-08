@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Patient History</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='update_patient_history.css') }}"> -->
+</head>
+<body>
+
+
+    <form method="POST">
+
+        <div class="row">
+            <label>Visit Type</label>
+            <input type="text" name="visit_type" required>
+        </div>
+
+        <div class="row">
+            <label>Test Done</label>
+            <input type="text" name="test_done" required>
+        </div>
+
+        <div class="row">
+            <label>Diagnosis</label>
+            <input type="text" name="diagnosis" required>
+        </div>
+
+        <div class="row">
+            <label>Prescription</label>
+            <input type="text" name="prescription" required>
+        </div>
+
+        <div class="row">
+            <label>Medicines</label>
+            <textarea name="medicines" rows="4" placeholder="Medicine 1 - 1-0-1&#10;Medicine 2 - 0-1-1"></textarea>
+        </div>
+
+
+
+        <button type="submit">save</button>
+    </form>
+
+</body>
+</html>

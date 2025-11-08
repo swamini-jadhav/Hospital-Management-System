@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctor_dashboard.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Welcome Dr. {{ doctor.name }}</h2>
+        <a href="{{ url_for('logout') }}">logout</a>
+    </div>
+
+    <!-- Upcoming Appointments Section -->
+    <h3>Upcoming Appointments</h3>
+
+    <table class="appointments-table">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Patient Name</th>
+                <th>Patient History</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for appt in appointments %}
+            <tr>
+                <td>{{ appt.id }}</td>
+                <td>{{ appt.patient_name }}</td>
+
+                <td>
+                    <a href="{{ url_for('update_history', patient_id=appt.patient_id) }}">update</a>
+                </td>
+
+                <td>
+                    <a href="{{ url_for('mark_complete', appt_id=appt.id) }}">mark as complete</a>
+                    <a href="{{ url_for('cancel_appointment', appt_id=appt.id) }}">cancel</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No upcoming appointments</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <!-- Assigned Patients Section -->
+    <h3>Assigned Patients</h3>
+
+    <div class="assigned-patients">
+        {% for patient in assigned_patients %}
+            <div class="patient-row">
+                <span>{{ patient.name }}</span>
+                <a href="{{ url_for('view_patient', patient_id=patient.id) }}">view</a>
+            </div>
+        {% else %}
+            <p>No assigned patients</p>
+        {% endfor %}
+    </div>
+
+    <!-- Provide Availability -->
+    <div class="availability-button">
+        <a href="{{ url_for('provide_availability') }}">Provide Availability</a>
+    </div>
+
+</body>
+</html>
