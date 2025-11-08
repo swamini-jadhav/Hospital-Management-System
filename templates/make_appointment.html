@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Availability</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='appointment.css') }}">
+</head>
+<body>
+
+    <h2>Doctor's Availability</h2>
+
+    <!-- Message after POST -->
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form method="POST">
+
+        <div class="availability-container">
+
+            <!-- Example static dates OR use a Jinja loop -->
+            {% for day in days %}
+            <div class="day-row">
+
+                <!-- Date Box -->
+                <div class="date-box">
+                    {{ day.date }}
+                </div>
+
+                <!-- Morning Slot -->
+                <label class="slot-box">
+                    <input type="checkbox" name="morning_{{ loop.index }}">
+                    {{ day.morning }}
+                </label>
+
+                <!-- Evening Slot -->
+                <label class="slot-box">
+                    <input type="checkbox" name="evening_{{ loop.index }}">
+                    {{ day.evening }}
+                </label>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <br>
+
+        <button type="submit">save</button>
+    </form>
+
+</body>
+</html>

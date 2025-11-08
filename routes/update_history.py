@@ -1,28 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy 
 import os
-
-BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE, "HMS.sqlite3")
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
-db = SQLAlchemy(app)
- #Add Jinja 2 Contnet Patient ID, Appointment ID etc
+from app import app, db
+from models import PatientHistory
 
 
-# Models
-class PatientHistory(db.Model):
-    AppointmentID = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    PatientID = db.Column(db.Integer)
-    DoctorID = db.Column(db.Integer)
-    VisitType=db.Column(db.String,nullable=False)
-    TestDone=db.Column(db.String)
-    Diagnosis=db.Column(db.String,nullable=False)
-    Prescription= db.Column(db.String,nullable=False)
-    Medicines = db.Column(db.String,nullable=False)
-
-# Routes
 @app.route("/update_patient_history", methods=["GET", "POST"])
 def updateHistory():
     message =""
