@@ -30,10 +30,3 @@ def updateHistory():
         db.session.commit()
         message = "Saved Successfully"
     return render_template("update_patient_history.html", message=message)
-
-if __name__ == "__main__":
-    # Create tables if DB does not exist
-    with app.app_context():
-        db.create_all()
-
-    app.run(debug=True)

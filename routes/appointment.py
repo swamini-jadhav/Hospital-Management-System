@@ -23,10 +23,3 @@ def regmake_appointment():
 
     return render_template("make_appointment.html", message="Appointment Booked Successfully", days=days)
 
-
-if __name__ == "__main__":
-    # Create tables if DB does not exist
-    with app.app_context():
-        db.create_all()
-
-    app.run(debug=True)
