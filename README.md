@@ -1,2 +1,2 @@
 ## Hospital-Management-System
-Python Lab Sem 3 
+Python Programming Lab Sem 3 
