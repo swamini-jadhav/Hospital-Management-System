@@ -3,71 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='doctor_dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='patient_dashboard.css') }}">
 </head>
 <body>
 
     <!-- Header -->
     <div class="header">
-        <h2>Welcome {{ Name }}</h2>
-       {#  <a href="{{ url_for('logout') }}">logout</a>  #}
+        <h2>Welcome {{ patient.name }}</h2>
+        <div class="links">
+            <a href="{{ url_for('edit_profile', patient_id=patient.id) }}">edit profile</a> |
+            <a href="{{ url_for('view_history', patient_id=patient.id) }}">History</a> |
+            <a href="{{ url_for('logout') }}">logout</a>
+        </div>
+    </div>
+
+    <!-- Departments Section -->
+    <h3>Departments</h3>
+    <div class="departments">
+        {% for dept in departments %}
+            <div class="department-row">
+                <span>{{ dept.name }}</span>
+                <a href="{{ url_for('view_department', dept_id=dept.id) }}">view details</a>
+            </div>
+        {% else %}
+            <p>No departments available</p>
+        {% endfor %}
     </div>
 
     <!-- Upcoming Appointments Section -->
     <h3>Upcoming Appointments</h3>
-
     <table class="appointments-table">
         <thead>
             <tr>
                 <th>Sr No.</th>
-                <th>Patient Name</th>
-                <th>Patient History</th>
-                <th>Actions</th>
+                <th>Doctor Name</th>
+                <th>Dept</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
             </tr>
         </thead>
-
-<!--         <tbody>
+        <tbody>
         {% for appt in appointments %}
             <tr>
-                <td>{{ appt.id }}</td>
-                <td>{{ appt.patient_name }}</td>
-
+                <td>{{ loop.index }}</td>
+                <td>{{ appt.doctor_name }}</td>
+                <td>{{ appt.department }}</td>
+                <td>{{ appt.date }}</td>
+                <td>{{ appt.time }}</td>
                 <td>
-                    <a href="{{ url_for('update_history', patient_id=appt.patient_id) }}">update</a>
-                </td>
-
-                <td>
-                    <a href="{{ url_for('mark_complete', appt_id=appt.id) }}">mark as complete</a>
                     <a href="{{ url_for('cancel_appointment', appt_id=appt.id) }}">cancel</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="4">No upcoming appointments</td>
-            </tr>
+            <tr><td colspan="6">No appointments scheduled</td></tr>
         {% endfor %}
-        </tbody> -->
+        </tbody>
     </table>
-
-
-    <!-- Assigned Patients Section -->
-    <h3>Assigned Patients</h3>
-
-    <div class="assigned-patients">
-        {% for patient in assigned_patients %}
-            <div class="patient-row">
-                <span>{{ Name }}</span>
-                <!-- <a href="{{ url_for('view_patient', patient_id=patient.id) }}">view</a> -->
-            </div>
-        {% else %}
-            <p>No assigned patients</p>
-        {% endfor %}
-    </div>
-
-    <!-- Provide Availability -->
-    <div class="availability-button">
-       {# <a href="{{ url_for('provide_availability') }}">Provide Availability</a> #}
-    </div>
 
 </body>
 </html>
