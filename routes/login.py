@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from models import User
+from models import Patient, Doctor, Admin
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -8,8 +8,14 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        user = User.query.filter_by(username=username, password=password).first()
-        message = "Login successful!" if user else "Invalid username or password"
+        ChkDoc = Doctor.query.filter_by(Username=username, Password=password).first()
+        ChkPat = Patient.query.filter_by(Username=username, Password=password).first()
+        message = "Login successful!" if ChkDoc or ChkPat else "Invalid username or password"
+        if ChkDoc:
+            return render_template("doctor_dashboard.html", Name=ChkDoc.FirstName)
+        elif ChkPat:
+            return render_template("patient_dashboard.html", Name=ChkPat.FirstName)
+
     return render_template("login.html", message=message)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -20,10 +26,10 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
 
-        if User.query.filter_by(username=username).first():
+        if Patient.query.filter_by(Username=username).first():
             message = "Username already exists"
         else:
-            new_user = User(name=name, username=username, password=password)
+            new_user = Patient(FirstName=name, LastName="XYZ", Username=username, Password=password)
             db.session.add(new_user)
             db.session.commit()
             message = "Registration successful!"

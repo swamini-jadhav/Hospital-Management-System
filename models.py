@@ -1,10 +1,10 @@
 from app import db
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    username = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
+# class User(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String, nullable=False)
+#     username = db.Column(db.String, unique=True, nullable=False)
+#     password = db.Column(db.String, nullable=False)
 
 class Appointment(db.Model):
     AppointmentID = db.Column(db.Integer, primary_key=True)
@@ -38,6 +38,7 @@ class Doctor(db.Model):
     LastName = db.Column(db.String,nullable=False)
     Username= db.Column(db.String, nullable=False)
     Password = db.Column(db.String, nullable=False)
+    #available=db.Column(db.JSON)
 
     Position = db.Column(db.String)
     Experience = db.Column(db.Integer)

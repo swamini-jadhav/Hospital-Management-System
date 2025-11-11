@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor Dashboard</title>
+    <title>Patient Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='doctor_dashboard.css') }}">
 </head>
 <body>
 
     <!-- Header -->
     <div class="header">
-        <h2>Welcome Dr. {{ Name }}</h2>
-        <a href="{{ url_for('logout') }}">logout</a>
+        <h2>Welcome {{ Name }}</h2>
+       {#  <a href="{{ url_for('logout') }}">logout</a>  #}
     </div>
 
     <!-- Upcoming Appointments Section -->
@@ -26,7 +26,7 @@
             </tr>
         </thead>
 
-        <tbody>
+<!--         <tbody>
         {% for appt in appointments %}
             <tr>
                 <td>{{ appt.id }}</td>
@@ -46,7 +46,7 @@
                 <td colspan="4">No upcoming appointments</td>
             </tr>
         {% endfor %}
-        </tbody>
+        </tbody> -->
     </table>
 
 
@@ -56,8 +56,8 @@
     <div class="assigned-patients">
         {% for patient in assigned_patients %}
             <div class="patient-row">
-                <span>{{ patient.name }}</span>
-                <a href="{{ url_for('view_patient', patient_id=patient.id) }}">view</a>
+                <span>{{ Name }}</span>
+                <!-- <a href="{{ url_for('view_patient', patient_id=patient.id) }}">view</a> -->
             </div>
         {% else %}
             <p>No assigned patients</p>
@@ -66,7 +66,7 @@
 
     <!-- Provide Availability -->
     <div class="availability-button">
-        <a href="{{ url_for('provide_availability') }}">Provide Availability</a>
+       {# <a href="{{ url_for('provide_availability') }}">Provide Availability</a> #}
     </div>
 
 </body>
