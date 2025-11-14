@@ -1,11 +1,5 @@
 from app import db
 
-# class User(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String, nullable=False)
-#     username = db.Column(db.String, unique=True, nullable=False)
-#     password = db.Column(db.String, nullable=False)
-
 class Appointment(db.Model):
     AppointmentID = db.Column(db.Integer, primary_key=True)
     PatientID = db.Column(db.Integer, db.ForeignKey('patient.PatientID'), nullable=False)
@@ -17,6 +11,8 @@ class Appointment(db.Model):
         nullable=False,
         default='Booked'
     )
+    patient = db.relationship('Patient', back_populates='appointments')
+    doctor = db.relationship('Doctor', back_populates='appointments')
 
 class Patient(db.Model):
     PatientID = db.Column(db.Integer, primary_key=True)
@@ -50,22 +46,23 @@ class Doctor(db.Model):
     photo = db.Column(db.String)
 
     appointments = db.relationship('Appointment', back_populates='doctor', cascade="all, delete")
-    histories = db.relationship('PatientHistory', back_populates='doctor', cascade="all, delete")
     department_rel = db.relationship('Department', back_populates='doctors')
 
 class PatientHistory(db.Model):
     AppointmentID = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    PatientID = db.Column(db.Integer, nullable=False)
+    PatientID = db.Column(db.Integer, db.ForeignKey('patient.PatientID'), nullable=False)
     DoctorID = db.Column(db.Integer)
     VisitType=db.Column(db.String,nullable=False)
     TestDone=db.Column(db.String)
     Diagnosis=db.Column(db.String,nullable=False)
     Prescription= db.Column(db.String,nullable=False)
     Medicines = db.Column(db.String,nullable=False)
+
     patient = db.relationship('Patient', back_populates='histories')
-    doctor = db.relationship('Doctor', back_populates='histories')
+
 
 class Department(db.Model):
     Department_name=db.Column(db.String, primary_key=True)
+    Overview = db.Column(db.String)
     doctors = db.relationship('Doctor', back_populates='department_rel', cascade="all, delete")
 
