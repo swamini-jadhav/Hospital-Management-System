@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from models import Patient, Department, Appointment
+from models import Patient, Department, Appointment, Doctor
 from datetime import datetime, timedelta
 
 @app.route('/patient_dashboard/<int:patientID>')
@@ -49,3 +49,11 @@ def make_appointment(patient_id, doctor_id):
         message = "Appointment Booked Successfully ✅"
 
     return render_template("make_appointment.html", message=message, days=days, patient=patient)
+
+@app.route("/doctor_info/<int:doctor_id>")
+def doctor_info(doctor_id):
+    doctor = Doctor.query.get(doctor_id)
+    if not doctor:
+        return "Doctor not found", 404
+    return render_template("doctor_info.html", doctor=doctor)
+    

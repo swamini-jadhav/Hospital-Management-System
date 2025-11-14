@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctor_details.css') }}">
+</head>
+<body>
+
+
+    <div class="doctor-card">
+
+        <h2>Dr. {{ doctor.FirstName }} {{ doctor.LastName }}</h2>
+
+        <p>{{ doctor.Position }}</p>
+        <p><strong>Department:</strong> {{ doctor.Department }}</p>
+
+        <p>
+            <strong>Experience:</strong> 
+            {{ doctor.Experience }} Years Overall
+        </p>
+
+        <div class="doctor-photo">
+            {% if doctor.photo %}
+                <img src="{{ url_for('static', filename='doctor_photos/' ~ doctor.photo) }}" alt="Doctor Photo">
+            {% else %}
+                <img src="{{ url_for('static', filename='default_profile.png') }}" alt="No Photo">
+            {% endif %}
+        </div>
+
+        <p>{{ doctor.Remarks }}</p>
+
+        <div class="actions">
+                check availability
+        </div>
+
+    </div>
+
+</body>
+</html>
