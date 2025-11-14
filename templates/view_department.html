@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Department Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='department_details.css') }}">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2>Department of {{ department.Department_name }}</h2>
+        <div class="links">
+            <a href="{{ url_for('login') }}">logout</a>
+        </div>
+    </div>
+
+    <!-- Overview Section -->
+    <h3>Overview</h3>
+    <p>{{ department.Overview }}</p>
+
+    <!-- Doctors List -->
+    <h3>Doctors' list</h3>
+    <table class="doctors-table">
+        <thead>
+            <tr>
+                <th>Doctor Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for doc in doctors %}
+            <tr>
+                <td>{{ doc.FirstName }}</td>
+                <td><a href="{{ url_for('make_appointment', doctor_id=doc.DoctorID, patient_id=patient.PatientID) }}">Make Appointment</a></td>
+
+            </tr>
+        {% else %}
+            <tr><td colspan="2">No doctors found in this department</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
