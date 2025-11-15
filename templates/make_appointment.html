@@ -52,7 +52,7 @@
         <!-- Morning -->
         <td>
             <input type="radio" name="selected_slot" 
-                value="M{{ loop.index }}"
+                value="{{ loop.index0 * 2 }}"
                 {% if availability[loop.index0][0] == 0 %}disabled{% endif %}>
             {{ day.morning }}
         </td>
@@ -60,7 +60,7 @@
         <!-- Evening -->
         <td>
             <input type="radio" name="selected_slot"
-                value="E{{ loop.index }}"
+                value="{{ loop.index0 * 2 + 1 }}"
                 {% if availability[loop.index0][1] == 0 %}disabled{% endif %}>
             {{ day.evening }}
         </td>

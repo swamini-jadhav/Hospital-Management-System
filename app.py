@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
+app.secret_key = "some_super_secret_key"
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE, "HMS.sqlite3")
