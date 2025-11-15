@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <title>Doctor Availability</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='appointment.css') }}">
+    <style>
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+        th {
+            background-color: #f2f2f2;
+            padding: 12px;
+            font-size: 20px;
+        }
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,33 +36,31 @@
 
     <form method="POST">
 
-        <div class="availability-container">
+        <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>Date</th>
+            <th>Morning (08:00 - 12:00 am)</th>
+            <th>Evening (04:00 - 09:00 pm)</th>
+        </tr>
 
-            <!-- Example static dates OR use a Jinja loop -->
-            {% for day in days %}
-            <div class="day-row">
+        {% for day in days %}
+        <tr>
+            <td>{{ day.date }}</td>
 
-                <!-- Date Box -->
-                <div class="date-box">
-                    {{ day.date }}
-                </div>
+            <!-- Morning checkbox -->
+            <td style="text-align:center;">
+                <input type="checkbox" name="morning_{{ loop.index }}">
+                08:00 - 12:00 am
+            </td>
 
-                <!-- Morning Slot -->
-                <label class="slot-box">
-                    <input type="checkbox" name="morning_{{ loop.index }}">
-                    {{ day.morning }}
-                </label>
-
-                <!-- Evening Slot -->
-                <label class="slot-box">
-                    <input type="checkbox" name="evening_{{ loop.index }}">
-                    {{ day.evening }}
-                </label>
-
-            </div>
-            {% endfor %}
-
-        </div>
+            <!-- Evening checkbox -->
+            <td style="text-align:center;">
+                <input type="checkbox" name="evening_{{ loop.index }}">
+                04:00 - 09:00 pm
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
         <br>
 
