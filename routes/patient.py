@@ -21,6 +21,7 @@ def view_department(dept_name, patient_id):
     doctors = department.doctors   
     return render_template("view_department.html", department=department, doctors=doctors, patient=patient)
 
+
 @app.route("/make_appointment/<int:patient_id>/<int:doctor_id>", methods=["GET", "POST"])
 def make_appointment(patient_id, doctor_id):
     today = datetime.today()
@@ -49,6 +50,8 @@ def make_appointment(patient_id, doctor_id):
         message = "Appointment Booked Successfully ✅"
 
     return render_template("make_appointment.html", message=message, days=days, patient=patient)
+
+
 
 @app.route("/doctor_info/<int:doctor_id>")
 def doctor_info(doctor_id):

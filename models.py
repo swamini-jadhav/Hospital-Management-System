@@ -37,7 +37,7 @@ class Doctor(db.Model):
     LastName = db.Column(db.String,nullable=False)
     Username= db.Column(db.String, nullable=False)
     Password = db.Column(db.String, nullable=False)
-    #available=db.Column(db.JSON)
+    available=db.Column(db.String)
     
     Department = db.Column(db.String, db.ForeignKey('department.Department_name'), nullable=False)
     Position = db.Column(db.String)

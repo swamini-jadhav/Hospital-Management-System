@@ -30,9 +30,9 @@
         </thead>
         <tbody>
         {% for doc in doctors %}
-            <tr>
+            <tr>    
                 <td>{{ doc.FirstName }}</td>
-                <td><a href="{{ url_for('make_appointment', doctor_id=doc.DoctorID, patient_id=patient.PatientID) }}">Make Appointment</a></td>
+                <td><a href="{{ url_for('show_available', doctor_id=doc.DoctorID, doctor_available=doc.available, patient_id=patient.PatientID) }}">Make Appointment</a></td>
                 <td><a href="{{ url_for('doctor_info', doctor_id=doc.DoctorID, patient_id=patient.PatientID) }}">View Doctor</a></td>
             </tr>
         {% else %}

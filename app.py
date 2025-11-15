@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 from routes.login import *
 from routes.patient import *
 from routes.update_history import *
-
+from routes.appointment import *
 
 if __name__ == "__main__":
     with app.app_context():

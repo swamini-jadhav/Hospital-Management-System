@@ -26,7 +26,9 @@
     </style>
 </head>
 <body>
-
+    {% if availability is not defined %}
+    {% set availability = [(1,0)] * 7 %}
+    {% endif %}
     <h2>Doctor's Availability</h2>
 
     <!-- Message after POST -->
@@ -43,23 +45,29 @@
             <th>Evening (04:00 - 09:00 pm)</th>
         </tr>
 
-        {% for day in days %}
-        <tr>
-            <td>{{ day.date }}</td>
+    {% for day in days %}
+    <tr>
+        <td>{{ day.date }}</td>
 
-            <!-- Morning checkbox -->
-            <td style="text-align:center;">
-                <input type="checkbox" name="morning_{{ loop.index }}">
-                08:00 - 12:00 am
-            </td>
+        <!-- Morning -->
+        <td>
+            <input type="radio" name="selected_slot" 
+                value="M{{ loop.index }}"
+                {% if availability[loop.index0][0] == 0 %}disabled{% endif %}>
+            {{ day.morning }}
+        </td>
 
-            <!-- Evening checkbox -->
-            <td style="text-align:center;">
-                <input type="checkbox" name="evening_{{ loop.index }}">
-                04:00 - 09:00 pm
-            </td>
-        </tr>
-        {% endfor %}
+        <!-- Evening -->
+        <td>
+            <input type="radio" name="selected_slot"
+                value="E{{ loop.index }}"
+                {% if availability[loop.index0][1] == 0 %}disabled{% endif %}>
+            {{ day.evening }}
+        </td>
+    </tr>
+    {% endfor %}
+
+
     </table>
 
         <br>
