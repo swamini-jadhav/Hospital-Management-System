@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from models import Patient, Department, Appointment, Doctor
+from models import Patient, Department, Appointment, Doctor,PatientHistory
 from datetime import datetime, timedelta
 
 @app.route('/patient_dashboard/<int:patientID>')
@@ -8,7 +8,37 @@ def patient_dashboard(patientID):
     # fetch data using the patientID
     patient = Patient.query.get(patientID)
     departments = Department.query.all()
-    return render_template("patient_dashboard.html", patient=patient, departments=departments)
+    appointments = Appointment.query.filter_by(PatientID=patientID).all()
+    return render_template("patient_dashboard.html", patient=patient, departments=departments,appointments=appointments)
+
+@app.route("/cancel_appointment/<int:appt_id>")
+def cancel_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    if appt:
+        appt.Status = "Cancelled"
+        db.session.commit()
+
+    return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
+
+
+@app.route("/view_patient_history/<int:patient_id>")
+def view_patient_history(patient_id):
+
+    patient = Patient.query.get_or_404(patient_id)
+
+    history_entries = PatientHistory.query.filter_by(PatientID=patient_id).all()    
+    doctor_map = {
+        entry.DoctorID: Doctor.query.get(entry.DoctorID)
+        for entry in history_entries
+    }
+
+    return render_template(
+        "view_patient_history.html",
+        patient=patient,
+        history=history_entries,
+        doctor_map=doctor_map
+    )
+
 
 @app.route('/department/<dept_name>/<int:patient_id>')
 def view_department(dept_name, patient_id):

@@ -5,7 +5,7 @@ class Appointment(db.Model):
     PatientID = db.Column(db.Integer, db.ForeignKey('patient.PatientID'), nullable=False)
     DoctorID = db.Column(db.Integer, db.ForeignKey('doctor.DoctorID'), nullable=False)
     Date=db.Column(db.Date)
-    Time=db.Column(db.Time)
+    Time = db.Column(db.String)
     Purpose=db.Column(db.String)
     Status=db.Column(db.Enum("Booked","Completed","Cancelled"),
         nullable=False,

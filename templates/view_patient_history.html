@@ -9,16 +9,16 @@
 
     <h2>Patient History</h2>
 
-    <p>Patient Name: {{ patient.name }}</p>
-    <p>Doctors' Name: {{ doctor.name }}</p>
-    <p>Department: {{ department }}</p>
+    <p>Patient Name: {{ patient.FirstName }}</p>
 
-    <a href="{{ url_for('doctor_dashboard') }}">back</a>
+    <a href="{{ url_for('patient_dashboard', patientID=patient.PatientID) }}">back</a>
 
     <table class="history-table">
         <thead>
             <tr>
                 <th>Visit No.</th>
+                <th>Doctor ID </th>
+                <th>Doctor Name </th>
                 <th>Visit Type</th>
                 <th>Tests Done</th>
                 <th>Diagnosis</th>
@@ -29,14 +29,16 @@
 
         <tbody>
         {% for entry in history %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ entry.visit_type }}</td>
-                <td>{{ entry.tests_done }}</td>
-                <td>{{ entry.diagnosis }}</td>
-                <td>{{ entry.prescription }}</td>
-                <td>{{ entry.medicines }}</td>
-            </tr>
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ entry.DoctorID }}</td>
+            <td>{{ doctor_map[entry.DoctorID].FirstName }} {{ doctor_map[entry.DoctorID].LastName }}</td>
+            <td>{{ entry.VisitType }}</td>
+            <td>{{ entry.TestDone }}</td>
+            <td>{{ entry.Diagnosis }}</td>
+            <td>{{ entry.Prescription }}</td>
+            <td>{{ entry.Medicines }}</td>
+        </tr>
         {% else %}
             <tr>
                 <td colspan="6">No history available</td>

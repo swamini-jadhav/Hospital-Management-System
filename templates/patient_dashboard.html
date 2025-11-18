@@ -31,7 +31,10 @@
                     <h3>Welcome {{ patient.PatientID }}</h3>
                     <div id="links">
                         <a href="{{ url_for('login') }}"><button class="logout">LOGOUT</button></a>
-                        <a href="{{ url_for('login') }}"><button class="history">HISTORY</button></a>
+                        
+                        <a href="{{ url_for('view_patient_history', patient_id=patient.PatientID) }}">
+                            <button class="history">HISTORY</button>
+                        </a>
                     </div>
                 </div>
                 <div class="content">
@@ -61,13 +64,13 @@
                             <tbody>
                             {% for appt in appointments %}
                                 <tr>
-                                    <td data-label="Sr No.">{{ loop.index }}</td>
-                                    <td data-label="Doctor Name">{{ appt.doctor_name }}</td>
-                                    <td data-label="Department">{{ appt.department }}</td>
-                                    <td data-label="Date">{{ appt.date }}</td>
-                                    <td data-label="Time">{{ appt.time }}</td>
-                                    <td>
-                                        <a href="{{ url_for('cancel_appointment', appt_id=appt.id) }}" class="action-cancel">Cancel</a>
+                                    <td data-label="Sr No.">{{ loop.index }}</td>   <!-- FIXED -->
+                                    <td data-label="Doctor Name">{{ appt.doctor.DoctorName }}</td>
+                                    <td data-label="Dept">{{ appt.doctor.Department }}</td>
+                                    <td data-label="Date">{{ appt.Date }}</td>
+                                    <td data-label="Time">{{ appt.Time }}</td>
+                                    <td data-label="Action">
+                                        <a href="{{ url_for('cancel_appointment', appt_id=appt.AppointmentID) }}" class="action-cancel">Cancel</a>
                                     </td>
                                 </tr>
                             {% else %}
