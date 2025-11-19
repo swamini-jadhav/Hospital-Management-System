@@ -65,7 +65,7 @@
                             {% for appt in appointments %}
                                 <tr>
                                     <td data-label="Sr No.">{{ loop.index }}</td>   <!-- FIXED -->
-                                    <td data-label="Doctor Name">{{ appt.doctor.DoctorName }}</td>
+                                    <td data-label="Doctor Name">{{ appt.doctor.FirstName }}</td>
                                     <td data-label="Dept">{{ appt.doctor.Department }}</td>
                                     <td data-label="Date">{{ appt.Date }}</td>
                                     <td data-label="Time">{{ appt.Time }}</td>
