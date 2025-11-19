@@ -28,7 +28,7 @@
         <div id="pageC">
             <div class="container">
                 <div class="title">
-                    <h3>Welcome {{ patient.PatientID }}</h3>
+                    <h3>Welcome {{ patient.FirstName }},</h3>
                     <div id="links">
                         <a href="{{ url_for('login') }}"><button class="logout">LOGOUT</button></a>
                         
@@ -40,13 +40,13 @@
                 <div class="content">
                     <h3>Departments</h3>
                     <div class="departments">
+                        <ol class="custom-steps">
                         {% for dept in departments %}
-                            <ol class="custom-steps">
-                                <a href="{{ url_for('view_department', dept_name=dept.Department_name, patient_id=patient.PatientID) }}"><li class="content1">{{ dept.Department_name }}</li></a>
-                            </ol>
+                            <a href="{{ url_for('view_department', dept_name=dept.Department_name, patient_id=patient.PatientID) }}"><li class="content1">{{ dept.Department_name }}</li></a>
                         {% else %}
                             <p>No departments available</p>
                         {% endfor %}
+                        </ol>
                     </div>
                     <div class="appointments">
                         <h3>UPCOMING APPOINTMENTS</h3>

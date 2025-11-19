@@ -464,3 +464,130 @@ form{
   color: #333;
   font-weight: bold;
 }
+
+/* Initialize the counter on the parent list */
+.custom-steps {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  counter-reset: step-counter; /* Initialize counter */
+}
+
+.custom-steps li {
+  /* ... li styles from above ... */
+  counter-increment: step-counter; /* Increment counter for each li */
+}
+
+.custom-steps li::before {
+  content: counter(step-counter); /* Display the counter value (the number) */
+  
+  /* Positioning and size of the teal box */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px; /* Width of the teal box */
+  height: 100%; /* Make it the full height of the bar */
+  
+  /* Color and text style */
+  background-color: #4db6ac; /* Teal background */
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  
+  /* Center the number */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Add the diagonal element (optional: more complex, involves transforms) */
+  /* For simplicity, we are creating a solid block. */
+}
+
+.custom-steps a{
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.overview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1vh;
+    margin: 1vh;
+}
+
+/* Mark Complete Button */
+.view-doc {
+    background-color: #d4d8ed; /* Light Green */
+    color: #2b1557;
+    border: 1px solid #361557;
+}
+
+.view-doc:hover {
+    background-color: #d0c3e6;
+}
+
+#profile-card{
+    background-color: #f4f4f5; /* Light neutral background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    margin: 2vw;
+    padding: 1.5vh;
+}
+
+#profile-card img{
+    margin-left: 0.5vw;
+}
+
+/* Cancel Button */
+.back {
+    background-color: #f8d7da; /* Light Red */
+    color: #721c24;
+    border: 1px solid #721c24;
+    padding: 1vh;
+}
+
+.back:hover {
+    background-color: #f5c6cb;
+}
+
+.just-for-back{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5vh;
+}
+
+.content p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 600;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.just-back-save{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5vh;
+    gap: 1vw;
+}
+
+/* Mark Complete Button */
+.save {
+    background-color: #d4edda; /* Light Green */
+    color: #155724;
+    border: 1px solid #155724;
+    padding: 1vh;
+}
+
+.save:hover {
+    background-color: #c3e6cb;
+}
+
+.input1{
+    margin-bottom: -0.5vh;
+    margin-top: 1.5vh;
+}
