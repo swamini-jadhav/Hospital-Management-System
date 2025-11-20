@@ -19,6 +19,7 @@ def doctor_dashboard(doctorID):
 @app.route("/update_patient_history/<int:doctor_id>/<int:patient_id>", methods=["GET", "POST"])
 def update_history(doctor_id, patient_id):
     message =""
+    patient = Patient.query.get(patient_id)
     if request.method == "POST":
         visit_type = request.form["visit_type"]
         test_done = request.form["test_done"]
@@ -40,6 +41,6 @@ def update_history(doctor_id, patient_id):
         print("Received:", visit_type, test_done, diagnosis, prescription, medicine)
         db.session.commit()
         message = "Saved Successfully"
-    return render_template("update_patient_history.html", message=message)
+    return render_template("update_patient_history.html", patient=patient, message=message)
 
 
