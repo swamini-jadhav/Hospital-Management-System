@@ -29,8 +29,8 @@
         <div id="pageC">
             <div class="container">
                 <div class="title">
-                    <h3>Welcome Dr. {{ Name }}</h3>
-                    <a href="{{ url_for('logout') }}"><button class="logout">LOGOUT</button></a>
+                    <h3>Welcome Dr. {{ doctor.FirstName }}</h3>
+                    <a href="{{ url_for('login') }}"><button class="logout">LOGOUT</button></a>
                 </div>
                 <div class="content">
                     <div class="appointments">
@@ -47,14 +47,12 @@
                         <tbody>
                             {% for appt in appointments %}
                                 <tr>
-                                    <td data-label="Sr No.">{{ appt.id }}</td>
-                                    <td data-label="Patient Name">{{ appt.patient_name }}</td>
+                                    <td data-label="Sr No.">{{ appt.AppointmentID }}</td>
+                                    <td data-label="Patient Name">{{ patient_map[appt.PatientID].FirstName }}</td>
                                     <td data-label="Patient History">
-                                    <a href="{{ url_for('update_history', patient_id=appt.patient_id) }}">Update</a>
-                                    </td>
-                                    <td data-label="Actions">
-                                    <a href="{{ url_for('mark_complete', appt_id=appt.id) }}" class="action-complete">Mark as Complete</a>
-                                    <a href="{{ url_for('cancel_appointment', appt_id=appt.id) }}" class="action-cancel">Cancel</a>
+                                        <a href="{{ url_for('update_history', doctor_id=appt.DoctorID, patient_id=appt.PatientID) }}">
+                                            Update History
+                                        </a>  
                                     </td>
                                 </tr>
                             {% else %}
@@ -75,9 +73,6 @@
                         {% else %}
                             <p>No assigned patients</p>
                         {% endfor %}
-                    </div>
-                    <div class="availability-button">
-                        <a href="{{ url_for('provide_availability') }}">Provide Availability</a>
                     </div>
                 </div>
             </div>
