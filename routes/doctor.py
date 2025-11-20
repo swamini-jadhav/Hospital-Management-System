@@ -12,7 +12,9 @@ def doctor_dashboard(doctorID):
         entry.PatientID: Patient.query.get(entry.PatientID)
         for entry in appointments
     }
-    return render_template("doctor_dashboard.html", doctor=doctor,appointments=appointments, patient_map=patient_map)
+    patient_ids = {appt.PatientID for appt in appointments}
+    assigned_patients = Patient.query.filter(Patient.PatientID.in_(patient_ids)).all()
+    return render_template("doctor_dashboard.html", doctor=doctor,appointments=appointments, patient_map=patient_map, assigned_patients=assigned_patients)
 
 @app.route("/update_patient_history/<int:doctor_id>/<int:patient_id>", methods=["GET", "POST"])
 def update_history(doctor_id, patient_id):
@@ -39,3 +41,5 @@ def update_history(doctor_id, patient_id):
         db.session.commit()
         message = "Saved Successfully"
     return render_template("update_patient_history.html", message=message)
+
+
