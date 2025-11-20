@@ -581,6 +581,7 @@ form{
     color: #155724;
     border: 1px solid #155724;
     padding: 1vh;
+    border-radius: 10px;
 }
 
 .save:hover {
@@ -591,3 +592,12 @@ form{
     margin-bottom: -0.5vh;
     margin-top: 1.5vh;
 }
+
+.input-group1 label{
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-group2 label{
+    font-family: 'Poppins', sans-serif;
+}
+
