@@ -8,7 +8,10 @@ def patient_dashboard(patientID):
     # fetch data using the patientID
     patient = Patient.query.get(patientID)
     departments = Department.query.all()
-    appointments = Appointment.query.filter_by(PatientID=patientID).all()
+    appointments = Appointment.query.filter(
+    Appointment.PatientID == patientID,
+    Appointment.Status != "Cancelled"
+    ).all()
     return render_template("patient_dashboard.html", patient=patient, departments=departments,appointments=appointments)
 
 @app.route("/cancel_appointment/<int:appt_id>")
@@ -89,4 +92,3 @@ def doctor_info(doctor_id):
     if not doctor:
         return "Doctor not found", 404
     return render_template("doctor_info.html", doctor=doctor)
-    
