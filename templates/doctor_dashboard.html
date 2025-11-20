@@ -67,8 +67,8 @@
                     <div class="assigned-patients">
                         {% for patient in assigned_patients %}
                             <div class="patient-row">
-                                <span>{{ patient.name }}</span>
-                                <a href="{{ url_for('view_patient', patient_id=patient.id) }}">view</a>
+                                <span>{{ patient.FirstName }} {{ patient.LastName }}</span>
+                                <a href="{{ url_for('view_patient_history', patient_id=patient.PatientID, doctorID=doctor.DoctorID) }}">view</a>
                             </div>
                         {% else %}
                             <p>No assigned patients</p>
