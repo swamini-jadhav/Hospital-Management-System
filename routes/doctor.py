@@ -7,7 +7,10 @@ from datetime import datetime, timedelta
 def doctor_dashboard(doctorID):
     # fetch data using the patientID
     doctor = Doctor.query.get(doctorID)
-    appointments = Appointment.query.filter_by(DoctorID=doctorID).all()
+    appointments = Appointment.query.filter(
+    Appointment.DoctorID == doctorID,
+    Appointment.Status != "Cancelled"
+    ).all()
     patient_map = {
         entry.PatientID: Patient.query.get(entry.PatientID)
         for entry in appointments
@@ -42,5 +45,14 @@ def update_history(doctor_id, patient_id):
         db.session.commit()
         message = "Saved Successfully"
     return render_template("update_patient_history.html", patient=patient, message=message)
+
+@app.route("/cancel_doctor_appointment/<int:appt_id>")
+def cancel_doctor_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    if appt:
+        appt.Status = "Cancelled"
+        db.session.commit()
+
+    return redirect(url_for("doctor_dashboard", doctorID=appt.DoctorID))
 
 

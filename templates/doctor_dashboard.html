@@ -56,7 +56,7 @@
                                         </a>  
                                     </td>
                                     <td data-label="Actions">
-                                        <a href="#"><button class="action-cancel">Cancel</button></a>
+                                        <a href="{{ url_for('cancel_doctor_appointment', appt_id=appt.AppointmentID) }}"><button class="action-cancel">Cancel</button></a>
                                     </td>
                                 </tr>
                             {% else %}
