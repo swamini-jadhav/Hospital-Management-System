@@ -25,7 +25,7 @@ def update_history(doctor_id, patient_id):
         test_done = request.form["test_done"]
         diagnosis =request.form["diagnosis"]
         prescription=request.form["prescription"]
-        medicine=request.form["medicines"]
+        medicine=request.form["medicine"]
 
         new_apt = PatientHistory(
             PatientID=patient_id,
