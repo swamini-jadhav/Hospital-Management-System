@@ -382,6 +382,8 @@ form{
     background-color: #d4edda; /* Light Green */
     color: #155724;
     border: 1px solid #155724;
+    border-radius: 5px;
+    padding: 0.7vh;
 }
 
 .action-complete:hover {
@@ -393,6 +395,8 @@ form{
     background-color: #f8d7da; /* Light Red */
     color: #721c24;
     border: 1px solid #721c24;
+    border-radius: 5px;
+    padding: 0.7vh;
 }
 
 .action-cancel:hover {

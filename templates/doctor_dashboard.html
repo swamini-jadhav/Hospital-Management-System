@@ -55,6 +55,9 @@
                                             Update History
                                         </a>  
                                     </td>
+                                    <td data-label="Actions">
+                                        <a href="#"><button class="action-cancel">Cancel</button></a>
+                                    </td>
                                 </tr>
                             {% else %}
                                 <tr>
@@ -64,12 +67,14 @@
                         </tbody>
                         </table>
                     </div>
-                    <h3>Assigned Patients</h3>
+                    <div class="overview">
+                        <h3>Assigned Patients</h3>
+                    </div>
                     <div class="assigned-patients">
                         {% for patient in assigned_patients %}
-                            <div class="patient-row">
+                            <div class="patient-row flex justify-between items-center">
                                 <span>{{ patient.FirstName }} {{ patient.LastName }}</span>
-                                <a href="{{ url_for('view_patient_history', patient_id=patient.PatientID, doctorID=doctor.DoctorID) }}">view</a>
+                                <a href="{{ url_for('view_patient_history', patient_id=patient.PatientID, doctorID=doctor.DoctorID) }}"><button class="logout">VIEW</button></a>
                             </div>
                         {% else %}
                             <p>No assigned patients</p>
