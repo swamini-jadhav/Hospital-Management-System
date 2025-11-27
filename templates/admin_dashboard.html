@@ -4,85 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="..\static\style.css">
+    <link rel="icon" href="https://www.pngguru.in/storage/uploads/images/Medical%20icon%20png%20images%20%7C%20free%20images%20of%20medical%20icon%20vector_1651505897_729086707.webp">
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <h1>Welcome {{ admin.FirstName }}</h1>
-            <div class="search-box">
-                <input type="text" placeholder="doctor, patient, department">
-                <button>search</button>
-            </div>
+    <header>
+        <nav>
+        <div class="logo">
+            <h2>Logo</h2>
         </div>
-
-        <!-- Registered Doctors Section -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Registered Doctors</h2>
-                <a href="{{ url_for('add_doctor') }}" class="create-btn">create</a>
-            </div>
-            <div class="list-box">
-                {% for doctor in doctors %}
-                <div class="list-item">
-                    <span class="item-name">{{ doctor.FirstName }} {{ doctor.LastName }}</span>
-                    <div class="item-actions">
-                       {# <a href="{{ url_for('edit_doctor', id=doctor.id) }}" class="btn btn-edit">edit</a>
-                        <a href="{{ url_for('delete_doctor', id=doctor.id) }}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this doctor?')">delete</a>
-                        <a href="{{ url_for('blacklist_doctor', id=doctor.id) }}" class="btn btn-blacklist">blacklist</a> #}
+        <div class="nav-icons">
+            <ul>
+            <li>Contact <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18s" height="18" color="currentColor" fill="none">
+                <path d="M4.91186 10.5413L7.55229 7.90088C8.09091 7.36227 8.27728 6.56642 8.05944 5.83652C7.8891 5.26577 7.69718 4.57964 7.56961 3.99292C7.45162 3.45027 6.97545 3 6.42012 3H4.91186C3.8012 3 2.88911 3.90384 3.01094 5.0078C3.93709 13.3996 10.6004 20.0629 18.9922 20.9891C20.0962 21.1109 21 20.1988 21 19.0881V17.5799C21 17.0246 20.5479 16.569 20.0015 16.4696C19.3988 16.36 18.7611 16.1804 18.2276 16.0103C17.4611 15.7659 16.6091 15.9377 16.0403 16.5065L13.4587 19.0881" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+    <main>
+        <div id="pageC">
+            <div class="container">
+                <div class="title">
+                    <h2>Welcome {{ admin.FirstName }}</h2>
+                    <div class="search-box">
+                        <input type="text" placeholder="Doctor, Patient, Department...">
+                        <button class="srch">Search</button>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Registered Patients Section -->
-        <div class="section">
-            <h2>Registered Patients</h2>
-            <div class="list-box">
-                {% for patient in patients %}
-                <div class="list-item">
-                    <span class="item-name">{{ patient.FirstName }} {{ patient.LastName }}</span>
-                    <div class="item-actions">
-                        {# <a href="{{ url_for('edit_patient', id=patient.id) }}" class="btn btn-edit">edit</a>
-                        <a href="{{ url_for('delete_patient', id=patient.id) }}" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this patient?')">delete</a>
-                        <a href="{{ url_for('blacklist_patient', id=patient.id) }}" class="btn btn-blacklist">blacklist</a> #}
-                    </div>
+                <div class="section-header">
+                    <h3>Registered Doctors</h3>
+                    <a href="{{ url_for('add_doctor') }}"><buttton class="view-doc">Create</buttton></a>
                 </div>
-                {% endfor %}
+                <div class="list-box">
+                    {% for doctor in doctors %}
+                    <div class="list-item">
+                        <span class="item-name">{{ doctor.FirstName }} {{ doctor.LastName }}</span>
+                        <div class="item-actions">
+                        {# <a href="{{ url_for('edit_doctor', id=doctor.id) }}" class="butun butun-edit">Edit</a>
+                            <a href="{{ url_for('delete_doctor', id=doctor.id) }}" class="butun butun-delete" onclick="return confirm('Are you sure you want to delete this doctor?')">Delete</a>
+                            <a href="{{ url_for('blacklist_doctor', id=doctor.id) }}" class="butun butun-blacklist">Blacklist</a> #}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="section-header">
+                    <h3>Registered Patients</h3>
+                </div>
+                <div class="list-box">
+                    {% for patient in patients %}
+                    <div class="list-item">
+                        <span class="item-name">{{ patient.FirstName }} {{ patient.LastName }}</span>
+                        <div class="item-actions">
+                            {# <a href="{{ url_for('edit_patient', id=patient.id) }}" class="butun butun-edit">Edit</a>
+                            <a href="{{ url_for('delete_patient', id=patient.id) }}" class="butun butun-delete" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
+                            <a href="{{ url_for('blacklist_patient', id=patient.id) }}" class="butun butun-blacklist">Blacklist</a> #}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="appointments">
+                    <h3 style="font-family: 'Poppins', sans-serif;">Upcoming Appointments</h3>
+                    <table class="appointments-table">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Patient Name</th>
+                                <th>Doctor Name</th>
+                                <th>Date</th>
+                                <th>Patient History</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in appointments %}
+                            <tr>
+                                <td>{{ appointment.AppointmentID }}</td>
+                                <td>{{ appointment.PatientID }}</td>
+                                <td>{{ appointment.DoctorID }}</td>
+                                <td>{{ appointment.Date }}</td>
+                                <td><a href="{{ url_for('view_patient_history', patient_id=appointment.PatientID) }}"><button class="save">VIEW</button></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
-        <!-- Upcoming Appointments Section -->
-        <div class="section">
-            <h2>Upcoming Appointments</h2>
-            <div class="list-box">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sr No.</th>
-                            <th>Patient Name</th>
-                            <th>Doctor Name</th>
-                            <th>Date</th>
-                            <th>Patient History</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for appointment in appointments %}
-                        <tr>
-                            <td>{{ appointment.AppointmentID }}</td>
-                            <td>{{ appointment.PatientID }}</td>
-                            <td>{{ appointment.DoctorID }}</td>
-                            <td>{{ appointment.Date }}</td>
-                            <td>
-                               <a href="{{ url_for('view_patient_history', patient_id=appointment.PatientID) }}" class="btn btn-view">view</a> 
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    </main>
 </body>
 </html>

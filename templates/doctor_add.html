@@ -4,39 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Doctor</title>
+    <link rel="stylesheet" href="..\static\style.css">
+    <link rel="icon" href="https://www.pngguru.in/storage/uploads/images/Medical%20icon%20png%20images%20%7C%20free%20images%20of%20medical%20icon%20vector_1651505897_729086707.webp">
 </head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Add a new Doctor</h1>
-
-        <div class="form-container">
-            <div class="note">
-                Students can add more fields if required
-            </div>
-
-            <form action="{{ url_for('add_doctor') }}" method="POST">
-                <div class="form-group">
-                    <label for="fullname">Fullname</label>
-                    <input type="text" id="fullname" name="fullname" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="specialization">Specialization/Department</label>
-                    <input type="text" id="specialization" name="specialization" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="experience">Experience[years]</label>
-                    <input type="number" id="experience" name="experience" min="0" required>
-                </div>
-
-                <div class="divider">|</div>
-
-                <div class="button-container">
-                    <button type="submit" class="btn-create">create</button>
-                </div>
-            </form>
+    <header>
+        <nav>
+        <div class="logo">
+            <h2>Logo</h2>
         </div>
-    </div>
+        <div class="nav-icons">
+            <ul>
+            <li>Contact <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18s" height="18" color="currentColor" fill="none">
+                <path d="M4.91186 10.5413L7.55229 7.90088C8.09091 7.36227 8.27728 6.56642 8.05944 5.83652C7.8891 5.26577 7.69718 4.57964 7.56961 3.99292C7.45162 3.45027 6.97545 3 6.42012 3H4.91186C3.8012 3 2.88911 3.90384 3.01094 5.0078C3.93709 13.3996 10.6004 20.0629 18.9922 20.9891C20.0962 21.1109 21 20.1988 21 19.0881V17.5799C21 17.0246 20.5479 16.569 20.0015 16.4696C19.3988 16.36 18.7611 16.1804 18.2276 16.0103C17.4611 15.7659 16.6091 15.9377 16.0403 16.5065L13.4587 19.0881" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+    <main>
+        <div id="pageC">
+            <div class="container">
+                <div class="overview">
+                    <h2>Add a new Doctor</h2>
+                </div>
+                <div class="form-container">
+                    <form action="{{ url_for('add_doctor') }}" method="POST">
+                        <div class="form-group">
+                            <label for="fullname">Fullname: </label>
+                            <input type="text" id="fullname" name="fullname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialization">Specialization: </label>
+                            <input type="text" id="specialization" name="specialization" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post">Post: </label>
+                            <input type="text" id="post" name="post" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Experience [In Years]: </label>
+                            <input type="number" id="experience" name="experience" min="0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="remarks">Remarks: </label>
+                            <input type="text" id="remarks" name="remarks" required>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="submit" class="butun-create">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
+<!-- 
+Fullname
+Specialization
+Experience
+Remarks -->

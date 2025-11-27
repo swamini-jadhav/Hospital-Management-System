@@ -527,6 +527,8 @@ form{
     background-color: #d4d8ed; /* Light Green */
     color: #2b1557;
     border: 1px solid #361557;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
 }
 
 .view-doc:hover {
@@ -605,3 +607,177 @@ form{
     font-family: 'Poppins', sans-serif;
 }
 
+.section-header{
+    font-family: 'Poppins', sans-serif;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-header a{
+    text-decoration: none;
+}
+
+/* Container for the whole list */
+.list-box {
+    width: 100%;
+    margin: 20px auto; /* Center the box on the page */
+    padding: 0;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual doctor list item */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item:hover {
+    background-color: #f0f0ff;
+}
+
+/* Doctor's Name Styling */
+.item-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Actions container (where buttons will go) */
+.item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Styling for the new action button class */
+.butun {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.butun:hover {
+    transform: translateY(-1px);
+}
+
+/* Specific button styles using the new prefix */
+.butun-edit {
+    background-color: #007bff; /* Blue */
+    color: white;
+}
+
+.butun-delete {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+.butun-blacklist {
+    background-color: #ffc107; /* Yellow/Orange */
+    color: #333; /* Dark text for contrast */
+}
+
+/* Container: Use Flexbox to align input and button */
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 450px; /* Control the overall size */
+    margin-top: 15px; /* Separate it from the title */
+    border: 2px solid #d03040c9; /* Main brand color border */
+    border-radius: 25px; /* Very rounded corners for a modern pill shape */
+    overflow: hidden; /* Crucial to keep everything within the rounded container */
+}
+
+/* Input Field: Grow to take available space */
+.search-box input[type="text"] {
+    flex-grow: 1; /* Allow the input to fill the space */
+    padding: 10px 15px;
+    border: none; /* Remove default border */
+    outline: none; /* Remove focus outline, the container border is enough */
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+}
+
+.search-box input[type="text"]::placeholder {
+    color: #888;
+}
+
+.search-box .srch {
+    background-color: #d03040c9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.search-box .srch:hover {
+    background-color: #d03040a4;
+}
+
+.overview h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px; 
+}
+
+.form-group label {
+    width: 150px; 
+    text-align: left; 
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group input {
+    flex-grow: 1; 
+    max-width: 250px; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.butun-create {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.butun-create:hover {
+    background-color: #1e7e34;
+    transform: translateY(-1px);
+}
