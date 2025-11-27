@@ -3,29 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from app import app, db
 from datetime import datetime, timedelta, date
 from models import Doctor, Appointment
-# @app.route("/make_appointment", methods=["GET", "POST"])
-# def regmake_appointment():
-    
-#     days = [
-#         {"date": "21/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "22/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "23/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "24/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "25/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "26/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"},
-#         {"date": "27/01/2025", "morning": "08:00 - 12:00 am", "evening": "04:00 - 9:00 pm"}
-#     ]
 
-#     if request.method == "POST":
-#         department=request.form["Dept"]
-#         #doctors = Doctor.query.filter_by(dept=department).all()
-#         #Doctor_Names=[d.name for d in doctors]
-
-
-#     return render_template("make_appointment.html", message="Appointment Booked Successfully", days=days)
-@app.route("/show_available/<int:doctor_id>/<doctor_available>/<int:patient_id>",
+@app.route("/make_appointment/<int:doctor_id>/<doctor_available>/<int:patient_id>",
            methods=["GET", "POST"])
-def show_available(doctor_id, doctor_available, patient_id):
+def make_appointment(doctor_id, doctor_available, patient_id):
     if request.method == "POST":
         chosen = request.form.get("selected_slot")
         purpose=request.form.get("purpose")
@@ -76,3 +57,43 @@ def show_available(doctor_id, doctor_available, patient_id):
                            days=days,
                            availability=availability,
                            message=None)
+
+@app.route("/complete_appointment/<int:appt_id>")
+def complete_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    if appt:
+        appt.Status = "Completed"
+        db.session.commit()
+
+    return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
+
+@app.route("/complete_doctor_appointment/<int:appt_id>")
+def complete_doctor_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    if appt:
+        appt.Status = "Completed"
+        db.session.commit()
+    return redirect(url_for("doctor_dashboard", doctorID=appt.DoctorID))
+
+@app.route("/cancel_appointment/<int:appt_id>")
+def cancel_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    if appt:
+        appt.Status = "Cancelled"
+        db.session.commit()
+
+    return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
+
+@app.route("/cancel_doctor_appointment/<int:appt_id>")
+def cancel_doctor_appointment(appt_id):
+    appt = Appointment.query.get(appt_id)
+    # db.session.delete(appt)
+    # db.session.commit()
+    if appt:
+        appt.Status = "Cancelled"
+        db.session.commit()
+
+    return redirect(url_for("doctor_dashboard", doctorID=appt.DoctorID))
+
+
+

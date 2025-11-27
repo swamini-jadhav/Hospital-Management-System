@@ -10,18 +10,18 @@ def patient_dashboard(patientID):
     departments = Department.query.all()
     appointments = Appointment.query.filter(
     Appointment.PatientID == patientID,
-    Appointment.Status != "Cancelled"
+    Appointment.Status == "Booked"
     ).all()
     return render_template("patient_dashboard.html", patient=patient, departments=departments,appointments=appointments)
 
-@app.route("/cancel_appointment/<int:appt_id>")
-def cancel_appointment(appt_id):
-    appt = Appointment.query.get(appt_id)
-    if appt:
-        appt.Status = "Cancelled"
-        db.session.commit()
+# @app.route("/cancel_appointment/<int:appt_id>")
+# def cancel_appointment(appt_id):
+#     appt = Appointment.query.get(appt_id)
+#     if appt:
+#         appt.Status = "Cancelled"
+#         db.session.commit()
 
-    return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
+#     return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
 
 
 @app.route("/view_patient_history/<int:patient_id>")
@@ -53,37 +53,6 @@ def view_department(dept_name, patient_id):
         return "Patient not found", 404
     doctors = department.doctors   
     return render_template("view_department.html", department=department, doctors=doctors, patient=patient)
-
-
-@app.route("/make_appointment/<int:patient_id>/<int:doctor_id>", methods=["GET", "POST"])
-def make_appointment(patient_id, doctor_id):
-    today = datetime.today()
-    days = []
-    for i in range(1, 8):
-        date = today + timedelta(days=i)
-        days.append({
-            "date": date.strftime("%d/%m/%Y"),
-            "morning": "08:00 - 12:00 am",
-            "evening": "04:00 - 09:00 pm"
-        })
-    
-    patient = Patient.query.get(patient_id)
-
-    message = None  # default (don’t show message unless POST)
-
-    if request.method == "POST":
-        selected_slots = []
-        for i in range(1, 8):
-            if request.form.get(f"morning_{i}"):
-                selected_slots.append(f"Morning of {days[i-1]['date']}")
-            if request.form.get(f"evening_{i}"):
-                selected_slots.append(f"Evening of {days[i-1]['date']}")
-        
-        print("Selected Slots:", selected_slots)
-        message = "Appointment Booked Successfully ✅"
-
-    return render_template("make_appointment.html", message=message, days=days, patient=patient)
-
 
 
 @app.route("/doctor_info/<int:doctor_id>")

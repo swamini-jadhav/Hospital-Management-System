@@ -1,15 +1,15 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from models import Patient, Department, Appointment, Doctor,PatientHistory
-from datetime import datetime, timedelta
+from models import Patient, Appointment, Doctor, PatientHistory
+
 
 @app.route('/doctor_dashboard/<int:doctorID>')
 def doctor_dashboard(doctorID):
-    # fetch data using the patientID
+
     doctor = Doctor.query.get(doctorID)
     appointments = Appointment.query.filter(
     Appointment.DoctorID == doctorID,
-    Appointment.Status != "Cancelled"
+    Appointment.Status == "Booked"
     ).all()
     patient_map = {
         entry.PatientID: Patient.query.get(entry.PatientID)
@@ -46,13 +46,5 @@ def update_history(doctor_id, patient_id):
         message = "Saved Successfully"
     return render_template("update_patient_history.html", patient=patient, message=message)
 
-@app.route("/cancel_doctor_appointment/<int:appt_id>")
-def cancel_doctor_appointment(appt_id):
-    appt = Appointment.query.get(appt_id)
-    if appt:
-        appt.Status = "Cancelled"
-        db.session.commit()
-
-    return redirect(url_for("doctor_dashboard", doctorID=appt.DoctorID))
 
 

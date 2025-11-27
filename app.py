@@ -10,6 +10,7 @@ DB_PATH = os.path.join(BASE, "HMS.sqlite3")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = "your-secret-key"
 
 db = SQLAlchemy(app)
 
@@ -18,6 +19,7 @@ from routes.login import *
 from routes.patient import *
 from routes.appointment import *
 from routes.doctor import *
+from routes.admin import * 
 
 if __name__ == "__main__":
     with app.app_context():

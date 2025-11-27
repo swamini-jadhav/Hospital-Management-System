@@ -52,6 +52,7 @@
                                         </a>  
                                     </td>
                                     <td data-label="Actions">
+                                        <a href="{{ url_for('complete_appointment', appt_id=appt.AppointmentID) }}"><button class="action-complete">Mark As Done</button></a>
                                         <a href="{{ url_for('cancel_doctor_appointment', appt_id=appt.AppointmentID) }}"><button class="action-cancel">Cancel</button></a>
                                     </td>
                                 </tr>
