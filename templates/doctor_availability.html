@@ -40,8 +40,6 @@
                     {% for day, slots in availability %}
                     <tr>
                         <td>{{ day }}</td>
-
-                        <!-- slots[0] = morning, slots[1] = evening -->
                         <td>
                             <input type="checkbox" name="slot{{ loop.index0 }}m"
                                    {% if slots[0] == 1 %}checked{% endif %}>

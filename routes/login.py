@@ -12,13 +12,6 @@ def login():
         ChkDoc = Doctor.query.filter_by(Username=username, Password=password).first()
         ChkPat = Patient.query.filter_by(Username=username, Password=password).first()
         message = "Login successful!" if ChkDoc or ChkPat or ChkAdmn else "Invalid username or password"
-        # if ChkAdmn:
-        #     return redirect(url_for("admin_dashboard", adminID=ChkAdmn.AdminID))
-        # if ChkDoc:
-        #     return redirect(url_for("doctor_dashboard", doctorID=ChkDoc.DoctorID))
-        # if ChkPat:
-        #     # return render_template("patient_dashboard.html", Name=ChkPat.PatientID)
-        #     return redirect(url_for("patient_dashboard", patientID=ChkPat.PatientID))
         if ChkAdmn:
             session["adminId"] = ChkAdmn.AdminID   # ← STORE HERE
             return redirect(url_for("admin_dashboard", adminId=ChkAdmn.AdminID))

@@ -11,12 +11,11 @@ def make_appointment(doctor_id, doctor_available, patient_id):
         chosen = request.form.get("selected_slot")
         purpose=request.form.get("purpose")
         if chosen:
-            idx = int(chosen)   # direct integer slot index (0–13)
+            idx = int(chosen) 
             updatedl= list(doctor_available)
             updatedl[idx]="0"
             updated="".join(updatedl)
 
-            # Update DB
             doc = Doctor.query.get(doctor_id)
             doc.available = updated
             db.session.commit()
@@ -28,21 +27,15 @@ def make_appointment(doctor_id, doctor_available, patient_id):
             DoctorID = doctor_id,
             Date = appointment_date,
             Time = appointment_time,
-            Purpose = purpose,   # You can replace this with your form
+            Purpose = purpose, 
             Status = "Booked"
             )
             db.session.add(new_apt)
             db.session.commit()
             return redirect(url_for("patient_dashboard", patientID=patient_id))
-        
-
-
-    #doctor_available = "01001111000010"
     availability = []
     for i in range(0, 14, 2):
         availability.append((int(doctor_available[i]), int(doctor_available[i+1])))
-    # Now availability = [(m1, e1), (m2, e2), ... (m7, e7)]
-
     today = datetime.today()
     days = []
     for i in range(1, 8):
@@ -87,8 +80,6 @@ def cancel_appointment(appt_id):
 @app.route("/cancel_doctor_appointment/<int:appt_id>")
 def cancel_doctor_appointment(appt_id):
     appt = Appointment.query.get(appt_id)
-    # db.session.delete(appt)
-    # db.session.commit()
     if appt:
         appt.Status = "Cancelled"
         db.session.commit()
@@ -98,28 +89,21 @@ def cancel_doctor_appointment(appt_id):
 @app.route("/doctor_availability/<int:doctor_id>", methods=["GET", "POST"])
 def doctor_availability(doctor_id):
     doctor = Doctor.query.get(doctor_id)
-
-    # Availability is stored as "01001100110100"
     current = doctor.available or "00000000000000"
-
     today = datetime.today()
     days = [(today + timedelta(days=i)).strftime("%d/%m/%Y") for i in range(1, 8)]
-
-    # Build availability list for template: [(day, (m, e)), ...]
     availability = []
+
     for i in range(0, 14, 2):
         m = int(current[i])
         e = int(current[i+1])
         day = days[i//2]
         availability.append((day, (m, e)))
 
-    # -----------------------
-    #     HANDLE FORM SAVE
-    # -----------------------
     if request.method == "POST":
         updated = []
 
-        for idx in range(7):  # 7 days
+        for idx in range(7):  
             m = "1" if request.form.get(f"slot{idx}m") else "0"
             e = "1" if request.form.get(f"slot{idx}e") else "0"
             updated.append(m)

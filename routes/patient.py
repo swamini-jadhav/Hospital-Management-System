@@ -1,11 +1,10 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
 from models import Patient, Department, Appointment, Doctor,PatientHistory
-from datetime import datetime, timedelta
+
 
 @app.route('/patient_dashboard/<int:patientID>')
 def patient_dashboard(patientID):
-    # fetch data using the patientID
     patient = Patient.query.get(patientID)
     departments = Department.query.all()
     appointments = Appointment.query.filter(
@@ -56,11 +55,10 @@ def doctor_info(doctor_id):
 def edit_patient(patient_id):
     patient = Patient.query.get(patient_id)
     if request.method == 'POST':
-        # Get updated form values
         patient.FirstName = request.form['FirstName']
         patient.LastName = request.form['LastName']
         patient.Username = request.form['Username']
-        patient.Password = request.form['Password']  # hashing recommended
+        patient.Password = request.form['Password'] 
         db.session.commit()
 
     return render_template('edit_patient.html', patient=patient)

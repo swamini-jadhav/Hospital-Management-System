@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor Availability</title>
-    <!-- <link rel="stylesheet" href="..\static\style.css"> -->
      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -29,7 +28,6 @@
                     {% set availability = [(1,0)] * 7 %}
                     {% endif %}
                     <h2>Doctor's Availability</h2>
-                    <!-- Message after POST -->
                     {% if message %}
                         <p>{{ message }}</p>
                     {% endif %}
@@ -46,16 +44,12 @@
                 {% for day in days %}
                 <tr>
                     <td>{{ day.date }}</td>
-
-                    <!-- Morning -->
                     <td>
                         <input type="radio" name="selected_slot" 
                             value="{{ loop.index0 * 2 }}"
                             {% if availability[loop.index0][0] == 0 %}disabled{% endif %}>
                         {{ day.morning }}
                     </td>
-
-                    <!-- Evening -->
                     <td>
                         <input type="radio" name="selected_slot"
                             value="{{ loop.index0 * 2 + 1 }}"

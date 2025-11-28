@@ -1,12 +1,11 @@
 from flask import Flask, render_template, redirect, url_for, session, request
-from models import Department, Doctor, Patient, PatientHistory, Appointment, Admin
+from models import Department, Doctor, Patient, Appointment, Admin
 from app import db, app
 
 @app.route("/admin_dashboard/<int:adminID>")
 def admin_dashboard(adminID):
     patients = Patient.query.all()
     doctors = Doctor.query.all()
-    # appointments = Appointment.query.all()
     appointments = Appointment.query.filter(
     Appointment.Status == "Booked"
     ).all()
