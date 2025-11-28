@@ -95,5 +95,46 @@ def cancel_doctor_appointment(appt_id):
 
     return redirect(url_for("doctor_dashboard", doctorID=appt.DoctorID))
 
+@app.route("/doctor_availability/<int:doctor_id>", methods=["GET", "POST"])
+def doctor_availability(doctor_id):
+    doctor = Doctor.query.get(doctor_id)
+
+    # Availability is stored as "01001100110100"
+    current = doctor.available or "00000000000000"
+
+    today = datetime.today()
+    days = [(today + timedelta(days=i)).strftime("%d/%m/%Y") for i in range(1, 8)]
+
+    # Build availability list for template: [(day, (m, e)), ...]
+    availability = []
+    for i in range(0, 14, 2):
+        m = int(current[i])
+        e = int(current[i+1])
+        day = days[i//2]
+        availability.append((day, (m, e)))
+
+    # -----------------------
+    #     HANDLE FORM SAVE
+    # -----------------------
+    if request.method == "POST":
+        updated = []
+
+        for idx in range(7):  # 7 days
+            m = "1" if request.form.get(f"slot{idx}m") else "0"
+            e = "1" if request.form.get(f"slot{idx}e") else "0"
+            updated.append(m)
+            updated.append(e)
+
+        updated_string = "".join(updated)
+        doctor.available = updated_string
+        db.session.commit()
+
+        return redirect(url_for("doctor_dashboard", doctorID=doctor_id))
+
+    return render_template("doctor_availability.html",
+                           doctor=doctor,
+                           availability=availability)
+
+
 
 

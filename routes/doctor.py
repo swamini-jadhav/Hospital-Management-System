@@ -46,5 +46,22 @@ def update_history(doctor_id, patient_id):
         message = "Saved Successfully"
     return render_template("update_patient_history.html", patient=patient, message=message)
 
+@app.route('/edit_doctor/<int:doctor_id>', methods=['GET', 'POST'])
+def edit_doctor(doctor_id):
+    doctor = Doctor.query.get(doctor_id)
+
+    if request.method == 'POST':
+        doctor.FirstName = request.form['FirstName']
+        doctor.LastName = request.form['LastName']
+        doctor.Username = request.form['Username']
+        doctor.Password = request.form['Password'] 
+        doctor.Department = request.form['Department']
+        doctor.Position = request.form['Position']
+        doctor.Experience = request.form['Experience']
+        doctor.Remarks = request.form['Remarks']
+        db.session.commit()
+        return redirect(url_for('doctor_dashboard', doctorID=doctor.DoctorID))
+
+    return render_template('edit_doctor.html', doctor=doctor)
 
 

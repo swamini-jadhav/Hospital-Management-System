@@ -28,6 +28,10 @@
                 <div class="title">
                     <h3>Welcome Dr. {{ doctor.FirstName }}</h3>
                     <a href="{{ url_for('login') }}"><button class="logout">LOGOUT</button></a>
+                    <a href="{{ url_for('edit_doctor', doctor_id=doctor.DoctorID) }}">
+                            <button class="history">EDIT</button>
+                    </a>
+                    <a href="{{ url_for('doctor_availability', doctor_id=doctor.DoctorID) }}"><button class="logout">AVAILABILITY</button></a>
                 </div>
                 <div class="content">
                     <div class="appointments">

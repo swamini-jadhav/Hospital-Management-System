@@ -2,56 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor Availability</title>
-    <link rel="stylesheet" href="..\static\style.css">
-    <link rel="icon" href="https://www.pngguru.in/storage/uploads/images/Medical%20icon%20png%20images%20%7C%20free%20images%20of%20medical%20icon%20vector_1651505897_729086707.webp">
+    <title>Provide Availability</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <header>
-        <nav>
+
+<header>
+    <nav>
         <div class="logo">
             <h2>Logo</h2>
         </div>
         <div class="nav-icons">
             <ul>
-            <li>Contact <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18s" height="18" color="currentColor" fill="none">
-                <path d="M4.91186 10.5413L7.55229 7.90088C8.09091 7.36227 8.27728 6.56642 8.05944 5.83652C7.8891 5.26577 7.69718 4.57964 7.56961 3.99292C7.45162 3.45027 6.97545 3 6.42012 3H4.91186C3.8012 3 2.88911 3.90384 3.01094 5.0078C3.93709 13.3996 10.6004 20.0629 18.9922 20.9891C20.0962 21.1109 21 20.1988 21 19.0881V17.5799C21 17.0246 20.5479 16.569 20.0015 16.4696C19.3988 16.36 18.7611 16.1804 18.2276 16.0103C17.4611 15.7659 16.6091 15.9377 16.0403 16.5065L13.4587 19.0881" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg></li>
+                <li>Contact</li>
             </ul>
         </div>
-        </nav>
-    </header>
-    <main>
-        <div id="pageC">
-            <div class="container">
-                <div class="overview">
-                    <h2>Doctor's Availability</h2>
-                </div>
-                <div class="content">
-                    <p>Doctor's Name: Dr. {{ doctor.FirstName }} {{ doctor.LastName }}</p>
-                </div>
-                <div class="appointments">
-                    <table border="1" cellspacing="0" cellpadding="10" class="appointments-table">
-                        <tr>
-                            <th>Date</th>
-                            <th>Morning (08:00 - 12:00 am)</th>
-                            <th>Evening (04:00 - 09:00 pm)</th>
-                        </tr>
+    </nav>
+</header>
 
-                        {% for day in days %}
-                        <tr>
-                            <td>{{ day.date }}</td>
-                            <td>08:00 - 12:00 am</td>
-                            <td>04:00 - 09:00 pm</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                <div class="just-back-save">
-                    <a href="{{ url_for('patient_dashboard', patientID=patient.PatientID) }}"><button class="back">BACK</button></a>
-                    <a href="{{ url_for('patient_dashboard', patientID=patient.PatientID) }}"><button class="save">SAVE</button></a>
-                </div>
+<main>
+    <div id="pageC">
+        <div class="container">
+
+            <h2>Set Your Weekly Availability</h2>
+            <p>Dr. {{ doctor.FirstName }} {{ doctor.LastName }}</p>
+
+            <form method="POST">
+
+                <table border="1" cellspacing="0" cellpadding="10" class="appointments-table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Morning (08:00 - 12:00)</th>
+                        <th>Evening (04:00 - 09:00)</th>
+                    </tr>
+
+                    {% for day, slots in availability %}
+                    <tr>
+                        <td>{{ day }}</td>
+
+                        <!-- slots[0] = morning, slots[1] = evening -->
+                        <td>
+                            <input type="checkbox" name="slot{{ loop.index0 }}m"
+                                   {% if slots[0] == 1 %}checked{% endif %}>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="slot{{ loop.index0 }}e"
+                                   {% if slots[1] == 1 %}checked{% endif %}>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <button type="submit" class="save" style="margin-top: 20px;">SAVE</button>
+
+            </form>
+
+            <div class="just-back-save">
+                <a href="{{ url_for('doctor_dashboard', doctorID=doctor.DoctorID) }}">
+                    <button class="back">BACK</button>
+                </a>
             </div>
+
         </div>
-    </main>
+    </div>
+</main>
+
 </body>
 </html>

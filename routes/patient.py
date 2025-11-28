@@ -14,16 +14,6 @@ def patient_dashboard(patientID):
     ).all()
     return render_template("patient_dashboard.html", patient=patient, departments=departments,appointments=appointments)
 
-# @app.route("/cancel_appointment/<int:appt_id>")
-# def cancel_appointment(appt_id):
-#     appt = Appointment.query.get(appt_id)
-#     if appt:
-#         appt.Status = "Cancelled"
-#         db.session.commit()
-
-#     return redirect(url_for("patient_dashboard", patientID=appt.PatientID))
-
-
 @app.route("/view_patient_history/<int:patient_id>")
 def view_patient_history(patient_id):
 
@@ -61,3 +51,16 @@ def doctor_info(doctor_id):
     if not doctor:
         return "Doctor not found", 404
     return render_template("doctor_info.html", doctor=doctor)
+
+@app.route('/edit_patient/<int:patient_id>', methods=['GET', 'POST'])
+def edit_patient(patient_id):
+    patient = Patient.query.get(patient_id)
+    if request.method == 'POST':
+        # Get updated form values
+        patient.FirstName = request.form['FirstName']
+        patient.LastName = request.form['LastName']
+        patient.Username = request.form['Username']
+        patient.Password = request.form['Password']  # hashing recommended
+        db.session.commit()
+
+    return render_template('edit_patient.html', patient=patient)
