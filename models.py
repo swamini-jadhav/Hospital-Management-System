@@ -1,4 +1,6 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
 
 class Appointment(db.Model):
     AppointmentID = db.Column(db.Integer, primary_key=True)

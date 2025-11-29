@@ -15,12 +15,12 @@ body{
 }
 
 :root {
-    --primary-color: #007bff; /* Blue for actions/highlights */
-    --secondary-color: #6c757d; /* Gray for text */
-    --header-bg: #5a7188; /* Dark background */
+    --primary-color: #007bff; 
+    --secondary-color: #6c757d; 
+    --header-bg: #5a7188; 
     --header-text: #ffffff;
     --row-bg-odd: #ffffff;
-    --row-bg-even: #f8f9fa; /* Light grey stripe */
+    --row-bg-even: #f8f9fa; 
     --border-color: #dee2e6;
 }
 
@@ -271,10 +271,6 @@ form{
     transition: filter 0.3s ease;
 }
 
-/* .content{
-    display: flex;
-} */
-
 .title{
     display: flex;
     justify-content: space-between;
@@ -313,11 +309,11 @@ form{
 
 .appointments-table {
     width: 100%;
-    border-collapse: separate; /* Use separate to control spacing/borders */
+    border-collapse: separate; 
     border-spacing: 0;
 }
 
-/* Header Styles */
+
 .appointments-table thead th {
     padding: 1rem 1.5rem;
     background-color: var(--header-bg);
@@ -329,7 +325,7 @@ form{
     letter-spacing: 0.05em;
 }
 
-/* Table Cell Styles */
+
 .appointments-table tbody td {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--border-color);
@@ -338,22 +334,19 @@ form{
     color: var(--secondary-color);
 }
 
-/* Striping and Hover Effects */
 .appointments-table tbody tr:nth-child(even) {
     background-color: var(--row-bg-even);
 }
 
 .appointments-table tbody tr:hover {
-    background-color: #e9ecef; /* Slightly darker on hover */
+    background-color: #e9ecef; 
     transition: background-color 0.2s ease;
 }
 
-/* Last row border removal for clean bottom */
 .appointments-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-/* General link style */
 .appointments-table a {
     display: inline-block;
     margin-right: 0.75rem;
@@ -366,9 +359,8 @@ form{
     text-align: center;
 }
 
-/* Update History Link */
-.appointments-table td:nth-child(3) a { /* Targeting the 'Patient History' link */
-    background-color: #e0f7fa; /* Light Teal */
+.appointments-table td:nth-child(3) a { 
+    background-color: #e0f7fa; 
     color: #00838f;
     border: 1px solid #00838f;
 }
@@ -377,9 +369,9 @@ form{
     background-color: #b2ebf2;
 }
 
-/* Mark Complete Button */
+
 .action-complete {
-    background-color: #d4edda; /* Light Green */
+    background-color: #d4edda; 
     color: #155724;
     border: 1px solid #155724;
     border-radius: 5px;
@@ -390,9 +382,8 @@ form{
     background-color: #c3e6cb;
 }
 
-/* Cancel Button */
 .action-cancel {
-    background-color: #f8d7da; /* Light Red */
+    background-color: #f8d7da; 
     color: #721c24;
     border: 1px solid #721c24;
     border-radius: 5px;
@@ -403,7 +394,6 @@ form{
     background-color: #f5c6cb;
 }
         
-/* Message row when no appointments exist */
 .appointments-table td[colspan] {
     text-align: center;
     font-style: italic;
@@ -440,19 +430,18 @@ form{
 }
 
 .custom-steps {
-  list-style: none; /* Remove default bullets/numbers */
+  list-style: none; 
   padding: 0;
   margin: 20px 0;
   text-decoration: none;
 }
 
 .custom-steps li {
-    position: relative; /* Crucial for positioning the ::before element */
+    position: relative; 
     margin-bottom: 20px;
-    background-color: rgba(234, 86, 60, 0.668); /* Yellow background for the bar */
+    background-color: rgba(234, 86, 60, 0.668); 
     transition: background-color 0.25s;  
-    padding: 10px 10px 10px 70px; /* Add padding on the left for the number box */
-    /* Optional: Slight curve/bevel effect at the edges */
+    padding: 10px 10px 10px 70px; 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     text-decoration: none;
 }
@@ -463,48 +452,36 @@ form{
 }
 
 .custom-steps .content {
-  /* Style for the text content */
   font-family: sans-serif;
   color: #333;
   font-weight: bold;
 }
 
-/* Initialize the counter on the parent list */
 .custom-steps {
   list-style: none;
   padding: 0;
   margin: 20px 0;
-  counter-reset: step-counter; /* Initialize counter */
+  counter-reset: step-counter; 
 }
 
 .custom-steps li {
-  /* ... li styles from above ... */
-  counter-increment: step-counter; /* Increment counter for each li */
+  counter-increment: step-counter; 
 }
 
 .custom-steps li::before {
-  content: counter(step-counter); /* Display the counter value (the number) */
-  
-  /* Positioning and size of the teal box */
+  content: counter(step-counter); 
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px; /* Width of the teal box */
-  height: 100%; /* Make it the full height of the bar */
-  
-  /* Color and text style */
-  background-color: #4db6ac; /* Teal background */
+  width: 50px; 
+  height: 100%; 
+  background-color: #4db6ac; 
   color: white;
   font-size: 20px;
   font-weight: bold;
-  
-  /* Center the number */
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Add the diagonal element (optional: more complex, involves transforms) */
-  /* For simplicity, we are creating a solid block. */
 }
 
 .custom-steps a{
@@ -522,9 +499,8 @@ form{
     margin: 1vh;
 }
 
-/* Mark Complete Button */
 .view-doc {
-    background-color: #d4d8ed; /* Light Green */
+    background-color: #d4d8ed; 
     color: #2b1557;
     border: 1px solid #361557;
     padding-left: 0.5vw;
@@ -536,7 +512,7 @@ form{
 }
 
 #profile-card{
-    background-color: #f4f4f5; /* Light neutral background */
+    background-color: #f4f4f5; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -549,9 +525,8 @@ form{
     margin-left: 0.5vw;
 }
 
-/* Cancel Button */
 .back {
-    background-color: #f8d7da; /* Light Red */
+    background-color: #f8d7da; 
     color: #721c24;
     border: 1px solid #721c24;
     padding: 1vh;
@@ -581,9 +556,8 @@ form{
     gap: 1vw;
 }
 
-/* Mark Complete Button */
 .save {
-    background-color: #d4edda; /* Light Green */
+    background-color: #d4edda;
     color: #155724;
     border: 1px solid #155724;
     padding: 1vh;
@@ -618,10 +592,10 @@ form{
     text-decoration: none;
 }
 
-/* Container for the whole list */
+
 .list-box {
     width: 100%;
-    margin: 20px auto; /* Center the box on the page */
+    margin: 20px auto; 
     padding: 0;
     background-color: #f8f8f8;
     border: 1px solid #ddd;
@@ -629,7 +603,6 @@ form{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Individual doctor list item */
 .list-item {
     display: flex;
     justify-content: space-between;
@@ -647,20 +620,17 @@ form{
     background-color: #f0f0ff;
 }
 
-/* Doctor's Name Styling */
 .item-name {
     font-size: 1.1em;
     font-weight: 600;
     color: #333;
 }
 
-/* Actions container (where buttons will go) */
 .item-actions {
     display: flex;
     gap: 10px;
 }
 
-/* Styling for the new action button class */
 .butun {
     padding: 6px 12px;
     border: none;
@@ -675,40 +645,39 @@ form{
     transform: translateY(-1px);
 }
 
-/* Specific button styles using the new prefix */
 .butun-edit {
-    background-color: #007bff; /* Blue */
+    background-color: #007bff;
     color: white;
 }
 
 .butun-delete {
-    background-color: #dc3545; /* Red */
+    background-color: #dc3545; 
     color: white;
 }
 
 .butun-blacklist {
-    background-color: #ffc107; /* Yellow/Orange */
-    color: #333; /* Dark text for contrast */
+    background-color: #ffc107;
+    color: #333; 
 }
 
-/* Container: Use Flexbox to align input and button */
+
 .search-box {
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 450px; /* Control the overall size */
-    margin-top: 15px; /* Separate it from the title */
-    border: 2px solid #d03040c9; /* Main brand color border */
-    border-radius: 25px; /* Very rounded corners for a modern pill shape */
-    overflow: hidden; /* Crucial to keep everything within the rounded container */
+    max-width: 450px; 
+    margin-top: 15px; 
+    border: 2px solid #d03040c9; 
+    border-radius: 25px; 
+    overflow: hidden; 
 }
 
-/* Input Field: Grow to take available space */
+
 .search-box input[type="text"] {
-    flex-grow: 1; /* Allow the input to fill the space */
+    flex-grow: 1; 
     padding: 10px 15px;
-    border: none; /* Remove default border */
-    outline: none; /* Remove focus outline, the container border is enough */
+    border: none; 
+    outline: none; 
     font-size: 16px;
     color: #333;
     background-color: white;

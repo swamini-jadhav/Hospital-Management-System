@@ -38,17 +38,15 @@ def add_doctor():
         fullname = request.form["fullname"]
         specialization = request.form["specialization"]
         experience = request.form["experience"]
+        username = request.form["username"]
+        password = request.form["password"]
 
-        # Split first and last name
+        
         try:
             first, last = fullname.split(" ", 1)
         except:
             first = fullname
             last = ""
-
-        # Auto-create username & password
-        username = (first + "." + last).lower() or first.lower()
-        password = first.lower() + "123"   # you can hash this later
 
         new_doc = Doctor(
             FirstName=first,
@@ -57,8 +55,8 @@ def add_doctor():
             Password=password,
             Department=specialization,
             Experience=experience,
-            available="11111111111111",     # default
-            Position="Doctor",   # default
+            available="00000000000000",     
+            Position="Doctor",   
             Remarks="",
             photo=""
         )
